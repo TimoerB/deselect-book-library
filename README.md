@@ -25,7 +25,7 @@ To install the dependencies, run `npm install`.
 Dependencies that were installed:
 
 ```
-npm install express express-validator mongoose dotenv bcryptjs bcryrpt jsonwebtoken
+npm install express express-validator mongoose dotenv bcryptjs bcrypt jsonwebtoken
 ```
 
 Dependencies that were installed for development:
