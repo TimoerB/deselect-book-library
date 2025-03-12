@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
 const { check, validationResult } = require('express-validator');
+const { verifyToken } = require('../authentication/auth');
 
 router.get('/', async (req, res) => {
     try {
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', [
+router.post('/', verifyToken, [
     check('title').notEmpty().withMessage('Title is required'),
     check('author').notEmpty().withMessage('Author is required'),
 ], async (req, res) => {
@@ -31,7 +32,7 @@ router.post('/', [
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
     try {
         const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
@@ -44,7 +45,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
     await Book.findByIdAndDelete(req.params.id);
     res.status(204).send();
 });
