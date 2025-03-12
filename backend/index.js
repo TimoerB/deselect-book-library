@@ -5,6 +5,7 @@ const app = express();
 
 const bookRoutes = require('./routes/bookRoutes');
 
+app.use(express.json());
 app.use('/api/books', bookRoutes);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
