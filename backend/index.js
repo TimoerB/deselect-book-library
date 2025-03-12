@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
+const bookRoutes = require('./routes/bookRoutes');
+
+app.use('/api/books', bookRoutes);
+
 mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log('Connected to MongoDB');
 }).catch((err) => {
