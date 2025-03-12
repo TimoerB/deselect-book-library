@@ -25,13 +25,13 @@ To install the dependencies, run `npm install`.
 Dependencies that were installed:
 
 ```
-npm install express express-validator mongoose dotenv bcryptjs bcrypt jsonwebtoken
+npm install express express-validator mongoose dotenv bcryptjs bcrypt jsonwebtoken redis
 ```
 
 Dependencies that were installed for development:
 
 ```
-npm install --save-dev jest supertest mongodb-memory-server
+npm install --save-dev jest supertest mongodb-memory-server ioredis-mock
 ```
 
 ### Run

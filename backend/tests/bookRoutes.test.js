@@ -6,6 +6,18 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const MONGODB_PORT = 3000;
 
+jest.mock('../cache/redisClient', () => {
+    const Redis = require('ioredis-mock');
+    const redis = new Redis();
+    return {
+        _esModule: true,
+        default: redis,
+        get: redis.get.bind(redis),
+        set: redis.set.bind(redis),
+        del: redis.del.bind(redis),
+    };
+});
+
 describe('Book API', () => {
 
     let server;
