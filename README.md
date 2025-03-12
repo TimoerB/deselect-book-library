@@ -6,6 +6,10 @@ The application consists of a RESTful Node.js backend with connection to a Mongo
 
 ## Run
 
+### Run locally
+
+To run MongoDB locally, run `docker compose up -d` in the root directory.
+
 To run the backend:
 
 ```
