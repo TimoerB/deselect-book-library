@@ -103,6 +103,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://{{BACKEND_URL}}/api/auth/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user3\",\n    \"password\": \"Password123\",\n    \"email\": \"someone3@me.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{BACKEND_URL}}/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"{{BACKEND_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{BACKEND_URL}}/api/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"someone3@me.com\",\n    \"password\": \"Password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{BACKEND_URL}}/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{BACKEND_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
