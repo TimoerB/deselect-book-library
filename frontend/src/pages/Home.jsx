@@ -25,17 +25,25 @@ export const Home = () => {
       <h2>Books</h2>
       {success && <div className={"alert"}>Book successfully deleted!</div>}
       {error && <div className={"alert error"}>{error}</div>}
-      <ul>
+      <table border="1" cellPadding="10" cellSpacing="0" style={{borderCollapse: "collapse"}}>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Description</th>
+          <th>Published Date</th>
+        </tr>
+        </thead>
+        <tbody>
         {loading && <>Loading...</>}
-        {books.map(book => <li key={book._id} onClick={() => navigate(`/books/${book._id}`)}>
-          <p>{book.title} by {book.author}</p>
-          <small>
-            <span style={{color: 'gray'}}>{book.description}</span><br/>
-            <i>{book.publishedDate?.toLocaleString()}</i>
-            <button onClick={() => deleteHook(book._id)}>Delete book</button>
-          </small>
-        </li>)}
-      </ul>
+        {books.map(book => <tr key={book._id} onClick={() => navigate(`/books/${book._id}`)}>
+          <td>{book.title}</td>
+          <td>{book.author}</td>
+          <td>{book.description}</td>
+          <td>{book.publishedDate?.toLocaleString()}</td>
+        </tr>)}
+        </tbody>
+      </table>
     </>
   )
 }
