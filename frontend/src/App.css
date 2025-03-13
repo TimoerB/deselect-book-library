@@ -19,3 +19,8 @@ nav {
 .nav-btn {
     padding: 1rem;
 }
+
+input {
+    padding: 1rem;
+    border-radius: 10px 10px;
+}
