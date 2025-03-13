@@ -36,18 +36,32 @@ npm install --save-dev jest supertest mongodb-memory-server ioredis-mock
 
 ### Run
 
-To run the backend, run `npm start`.
+To run the backend separately, run `npm start`.
+
+To run backend, mongodb and redis in the docker compose file, run:
+
+```
+docker compose up --build
+```
 
 ### Run tests
 
-To run the tests, run `npm test`.    
+To run the tests, run `npm test`.
 
-### Run locally
+## Frontend
 
-To run MongoDB locally, run `docker compose up -d`.
+### Install 
 
-After which you can run the backend:
+Navigate to the `frontend` directory and install dependencies:
 
 ```
-npm start
+npm i
+```
+
+### Run
+
+Then run the UI:
+
+```
+npm run dev
 ```
