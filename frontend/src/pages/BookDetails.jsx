@@ -53,11 +53,11 @@ export const BookDetails = () => {
         <input type={"text"} placeholder={"Author"} value={author} onChange={e => setAuthor(e.target.value)}/>
         <input type={"text"} placeholder={"Description"} value={description}
                onChange={e => setDescription(e.target.value)}/>
-        <input type={"date"} placeholder={"Published Date"} value={publishedDate}
+        <input type={"date"} placeholder={"Published Date"} value={publishedDate ? publishedDate.split("T")[0] : ''}
                onChange={e => setPublishedDate(e.target.value)}/>
         <button type={"submit"}>Update</button>
       </form>
-      <button onClick={() => deleteHook(id)}>Delete</button>
+      <button onClick={() => deleteHook(id)} style={{marginTop: '1rem', width: '100%'}}>Delete</button>
     </>
   )
 }

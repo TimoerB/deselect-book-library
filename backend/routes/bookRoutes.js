@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
             return res.json(JSON.parse(cachedBooks));
         }
         const books = await Book.find();
-        await redisClient.setex('books', 3600, JSON.stringify(books));
+        await redisClient.set('books', JSON.stringify(books), {EX: 3600});
         res.json(books);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -66,7 +66,7 @@ router.get('/:id', async (req, res) => {
             return res.json(JSON.parse(cachedBook));
         }
         const book = await Book.findById(req.params.id);
-        await redisClient.setex(`book:${req.params.id}`, 3600, JSON.stringify(book));
+        await redisClient.set(`book:${req.params.id}`, JSON.stringify(book), {EX: 3600});
         res.json(book);
     } catch (error) {
         res.status(500).json({ message: error.message });

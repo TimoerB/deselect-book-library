@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {BACKEND_URL, BOOKS_API} from "../utils/constants.jsx";
-import {useDeleteHook} from "../hooks/useApiHook.js";
 import {useNavigate} from "react-router-dom";
 
 export const Home = () => {
@@ -10,8 +9,6 @@ export const Home = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const deleteHook = useDeleteHook(BOOKS_API, setSuccess, setError, navigate);
 
   useEffect(() => {
     axios.get(BACKEND_URL + BOOKS_API)
@@ -25,6 +22,9 @@ export const Home = () => {
       <h2>Books</h2>
       {success && <div className={"alert"}>Book successfully deleted!</div>}
       {error && <div className={"alert error"}>{error}</div>}
+
+      {loading && <>Loading...</>}
+
       <table border="1" cellPadding="10" cellSpacing="0" style={{borderCollapse: "collapse"}}>
         <thead>
         <tr>
@@ -35,7 +35,6 @@ export const Home = () => {
         </tr>
         </thead>
         <tbody>
-        {loading && <>Loading...</>}
         {books.map(book => <tr key={book._id} onClick={() => navigate(`/books/${book._id}`)}>
           <td>{book.title}</td>
           <td>{book.author}</td>
