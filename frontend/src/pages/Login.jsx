@@ -5,6 +5,7 @@ import {RegisterForm} from "../components/RegisterForm.jsx";
 import {LoginForm} from "../components/LoginForm.jsx";
 import './Login.css';
 import {useNavigate} from "react-router-dom";
+import {timedOutMessage} from "../utils/tools.jsx";
 
 export const Login = () => {
   const [register, setRegister] = useState(false);
@@ -13,6 +14,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const saveToken = token => localStorage.setItem(STORAGE_TOKEN_ENTRY, token);
 
@@ -23,6 +25,7 @@ export const Login = () => {
         saveToken(e.data.token);
         navigate('/');
       })
+      .catch(e => timedOutMessage(() => setError(e.message), () => setError(null)))
   }
 
   const handleRegister = (e) => {
@@ -32,9 +35,11 @@ export const Login = () => {
         saveToken(e.data.token);
         navigate('/');
       })
+      .catch(e => timedOutMessage(() => setError(e.message), () => setError(null)))
   }
   return (
     <>
+      {error && <div className={"alert error"}>{error}</div>}
       {register ? <>
           <RegisterForm handleRegister={handleRegister} setEmail={setEmail} setPassword={setPassword}
                         setUsername={setUsername}/>

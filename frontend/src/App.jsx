@@ -4,6 +4,7 @@ import {Home} from "./pages/Home.jsx";
 import {Link, Route, Routes} from "react-router-dom";
 import {AddBook} from "./pages/AddBook.jsx";
 import {Login} from "./pages/Login.jsx";
+import {BookDetails} from "./pages/BookDetails.jsx";
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path={'/'} element={<Home/>}/>
         <Route path={'/add'} element={<AddBook/>}/>
         <Route path={'/login'} element={<Login/>}/>
+        <Route path={'/books/:id'} element={<BookDetails/>}/>
       </Routes>
     </>
   )

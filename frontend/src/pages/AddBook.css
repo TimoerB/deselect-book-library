@@ -1,7 +1,11 @@
-.book-added {
+.alert {
     background-color: darkseagreen;
     border-radius: 10px 10px;
     padding: 1rem;
     text-align: center;
     margin: 1rem;
+}
+
+.error {
+    background-color: indianred;
 }

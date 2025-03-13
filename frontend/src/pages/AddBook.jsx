@@ -1,21 +1,24 @@
-import {BACKEND_URL, BOOKS_API, STORAGE_TOKEN_ENTRY} from "../utils/constants.jsx";
-import axios from "axios";
+import {BOOKS_API} from "../utils/constants.jsx";
 import {useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './AddBook.css';
+import {usePostHook} from "../hooks/useApiHook.js";
 
 export const AddBook = () => {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
   const titleRef = useRef(null);
   const authorRef = useRef(null);
   const descriptionRef = useRef(null);
   const publishedDateRef = useRef(null);
 
+  const postHook = usePostHook(BOOKS_API, setSuccess, setError, navigate);
+
   const handleAddBook = (e) => {
     e.preventDefault();
 
-    if (!titleRef || !titleRef.current || !authorRef || !authorRef.current) return alert('No title or author referenced!');
+    if (!titleRef?.current?.value || !authorRef?.current?.value) return alert('No title or author referenced!');
 
     const newBook = {
       title: titleRef.current.value,
@@ -24,26 +27,13 @@ export const AddBook = () => {
       publishedDate: publishedDateRef?.current.value,
     }
 
-    const token = localStorage.getItem(STORAGE_TOKEN_ENTRY);
-
-    axios.post(BACKEND_URL + BOOKS_API, newBook,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(e => {
-        setSuccess(true)
-        setTimeout(() => {
-          setSuccess(false);
-          navigate('/');
-        }, 2000)
-      })
+    postHook(newBook);
   }
   return (
     <>
       <h2>Add a book</h2>
-      {success && <div className={"book-added"}>Book successfully added!</div>}
+      {success && <div className={"alert"}>Book successfully added!</div>}
+      {error && <div className={"alert error"}>{error}</div>}
       <form onSubmit={handleAddBook}>
         <input type={"text"} placeholder={"Title"} ref={titleRef}/>
         <input type={"text"} placeholder={"Author"} ref={authorRef}/>
